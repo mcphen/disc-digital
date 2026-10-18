@@ -1,0 +1,287 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', sans-serif;
+    scroll-behavior: smooth;
+}
+
+@layer base {
+    :root {
+        --background: 42 24% 97%;
+        --foreground: 30 6% 11%;
+        --card: 0 0% 100%;
+        --card-foreground: 30 6% 11%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 30 6% 11%;
+        --primary: 40 72% 51%;
+        --primary-foreground: 30 8% 9%;
+        --secondary: 42 22% 92%;
+        --secondary-foreground: 30 8% 17%;
+        --muted: 40 18% 94%;
+        --muted-foreground: 30 7% 43%;
+        --accent: 43 68% 92%;
+        --accent-foreground: 36 76% 29%;
+        --destructive: 0 76% 57%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 40 16% 85%;
+        --input: 40 16% 82%;
+        --ring: 40 72% 51%;
+        --chart-1: 40 72% 51%;
+        --chart-2: 148 100% 27%;
+        --chart-3: 355 77% 47%;
+        --chart-4: 52 94% 55%;
+        --chart-5: 30 6% 16%;
+        --radius: 1rem;
+        --sidebar-background: 30 6% 9%;
+        --sidebar-foreground: 42 24% 96%;
+        --sidebar-primary: 40 72% 55%;
+        --sidebar-primary-foreground: 30 8% 9%;
+        --sidebar-accent: 35 10% 16%;
+        --sidebar-accent-foreground: 0 0% 100%;
+        --sidebar-border: 35 10% 19%;
+        --sidebar-ring: 40 72% 55%;
+    }
+
+    .dark {
+        --background: 30 7% 7%;
+        --foreground: 42 24% 96%;
+        --card: 30 7% 10%;
+        --card-foreground: 42 24% 96%;
+        --popover: 30 7% 11%;
+        --popover-foreground: 42 24% 96%;
+        --primary: 40 75% 56%;
+        --primary-foreground: 30 8% 8%;
+        --secondary: 35 10% 16%;
+        --secondary-foreground: 42 24% 96%;
+        --muted: 35 9% 14%;
+        --muted-foreground: 40 8% 67%;
+        --accent: 40 31% 17%;
+        --accent-foreground: 43 82% 72%;
+        --destructive: 0 72% 55%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 35 9% 19%;
+        --input: 35 9% 22%;
+        --ring: 40 75% 56%;
+        --sidebar-background: 30 8% 6%;
+        --sidebar-foreground: 42 24% 96%;
+        --sidebar-primary: 40 75% 56%;
+        --sidebar-primary-foreground: 30 8% 8%;
+        --sidebar-accent: 35 10% 15%;
+        --sidebar-accent-foreground: 0 0% 100%;
+        --sidebar-border: 35 9% 17%;
+        --sidebar-ring: 40 75% 56%;
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply min-h-screen bg-background font-sans text-foreground antialiased;
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    }
+
+    ::selection {
+        background: hsl(var(--primary) / 0.28);
+    }
+
+    select,
+    textarea,
+    input[type='file'] {
+        border-radius: 0.9rem !important;
+        border-color: hsl(var(--border)) !important;
+        background-color: hsl(var(--card) / 0.78) !important;
+        transition:
+            border-color 300ms ease,
+            box-shadow 300ms ease,
+            background-color 300ms ease;
+    }
+
+    select:focus,
+    textarea:focus,
+    input[type='file']:focus {
+        border-color: hsl(var(--primary) / 0.6) !important;
+        box-shadow: 0 0 0 4px hsl(var(--primary) / 0.1) !important;
+        outline: none;
+    }
+}
+
+@layer components {
+    .disc-app-backdrop,
+    .disc-auth-backdrop,
+    .disc-welcome-backdrop {
+        position: relative;
+        isolation: isolate;
+        min-height: 100svh;
+        overflow: hidden;
+        background:
+            radial-gradient(circle at 8% 0%, hsl(43 86% 70% / 0.24), transparent 30rem),
+            radial-gradient(circle at 94% 10%, hsl(148 70% 55% / 0.1), transparent 32rem),
+            linear-gradient(145deg, hsl(var(--background)), hsl(42 30% 94%));
+    }
+
+    .dark .disc-app-backdrop,
+    .dark .disc-auth-backdrop,
+    .dark .disc-welcome-backdrop {
+        background:
+            radial-gradient(circle at 8% 0%, hsl(40 75% 50% / 0.13), transparent 32rem),
+            radial-gradient(circle at 94% 10%, hsl(148 80% 35% / 0.08), transparent 34rem), hsl(var(--background));
+    }
+
+    .disc-orb {
+        position: absolute;
+        z-index: -1;
+        border-radius: 9999px;
+        filter: blur(1px);
+        opacity: 0.58;
+        animation: disc-float 22s ease-in-out infinite;
+    }
+
+    .disc-glass {
+        border: 1px solid hsl(var(--border) / 0.78);
+        background: hsl(var(--card) / 0.72);
+        box-shadow: 0 24px 80px -36px hsl(36 55% 22% / 0.35);
+        backdrop-filter: blur(24px) saturate(150%);
+    }
+
+    .disc-page-enter {
+        animation: disc-page-in 850ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .disc-page-shell h1 {
+        letter-spacing: -0.035em;
+    }
+
+    .disc-eyebrow {
+        @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-300;
+    }
+
+    .disc-page-shell [class~='rounded-xl'][class~='border'][class~='bg-card'],
+    .disc-page-shell section[class~='rounded-xl'][class~='border'] {
+        border-color: hsl(var(--border) / 0.72);
+        border-radius: 1.4rem;
+        background: hsl(var(--card) / 0.82);
+        box-shadow: 0 18px 50px -38px hsl(36 55% 22% / 0.42);
+        backdrop-filter: blur(18px) saturate(135%);
+        transition:
+            border-color 400ms ease,
+            box-shadow 400ms ease,
+            transform 400ms ease;
+    }
+
+    .disc-page-shell [class~='rounded-xl'][class~='border'][class~='bg-card']:hover,
+    .disc-page-shell section[class~='rounded-xl'][class~='border']:hover {
+        border-color: hsl(var(--primary) / 0.2);
+        box-shadow: 0 24px 64px -42px hsl(36 55% 22% / 0.52);
+    }
+
+    .disc-page-shell table tbody tr {
+        transition: background-color 350ms ease;
+    }
+
+    .disc-page-shell table tbody tr:hover {
+        background: hsl(var(--accent) / 0.58);
+    }
+
+    .disc-mobile-stack {
+        @apply divide-y divide-border/60;
+    }
+
+    .disc-mobile-card {
+        @apply relative p-4;
+        background: hsl(var(--card) / 0.82);
+        transition:
+            background-color 260ms ease,
+            border-color 260ms ease,
+            transform 260ms ease;
+    }
+
+    .disc-mobile-card--interactive {
+        @apply cursor-pointer active:scale-[0.99];
+    }
+
+    .disc-mobile-card--interactive:active {
+        background: hsl(var(--accent) / 0.52);
+    }
+
+    .disc-mobile-card--selected {
+        background: hsl(var(--primary) / 0.1);
+        box-shadow: inset 3px 0 0 hsl(var(--primary));
+    }
+
+    .disc-mobile-meta {
+        @apply grid grid-cols-2 gap-x-4 gap-y-3 text-sm;
+    }
+
+    .disc-mobile-meta dt {
+        @apply text-[11px] font-semibold uppercase tracking-wide text-muted-foreground;
+    }
+
+    .disc-mobile-meta dd {
+        @apply mt-0.5 min-w-0 break-words font-medium text-foreground;
+    }
+
+    .disc-mobile-actions {
+        @apply flex flex-col gap-2;
+    }
+
+    .disc-mobile-actions > * {
+        @apply w-full;
+    }
+}
+
+@media (min-width: 480px) {
+    .disc-mobile-actions {
+        flex-direction: row;
+    }
+
+    .disc-mobile-actions > * {
+        width: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .disc-page-shell {
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .disc-page-shell input,
+    .disc-page-shell select,
+    .disc-page-shell textarea {
+        font-size: 16px;
+    }
+}
+
+@keyframes disc-float {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+        transform: translate3d(0, -28px, 0) scale(1.04);
+    }
+}
+
+@keyframes disc-page-in {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.995);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

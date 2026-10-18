@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Guide de présentation — DISC Digital</title>
+    <style>
+        @page { size: A4; margin: 0; }
+        * { box-sizing: border-box; }
+        :root {
+            --ink: #1d1b18;
+            --muted: #6d675e;
+            --gold: #d6a329;
+            --gold-dark: #996b09;
+            --green: #00853f;
+            --red: #e31b23;
+            --paper: #fbfaf7;
+            --line: #e7e0d3;
+            --soft: #f3efe7;
+        }
+        body { margin: 0; color: var(--ink); background: #d8d5cf; font-family: "Segoe UI", Arial, sans-serif; }
+        .page {
+            position: relative;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 19mm 17mm 18mm;
+            overflow: hidden;
+            background: var(--paper);
+            page-break-after: always;
+        }
+        .page:last-child { page-break-after: auto; }
+        .tricolor { position: absolute; inset: 0 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); height: 3mm; }
+        .tricolor i:nth-child(1) { background: var(--green); }
+        .tricolor i:nth-child(2) { background: #fdef42; }
+        .tricolor i:nth-child(3) { background: var(--red); }
+        .footer { position: absolute; left: 17mm; right: 17mm; bottom: 8mm; display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 3mm; color: var(--muted); font-size: 8px; }
+        .eyebrow { margin: 0 0 2mm; color: var(--gold-dark); font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+        h1, h2, h3, p { margin-top: 0; }
+        h1 { margin-bottom: 5mm; font-size: 31px; line-height: 1.08; letter-spacing: -.035em; }
+        h2 { margin-bottom: 4mm; font-size: 23px; line-height: 1.15; letter-spacing: -.025em; }
+        h3 { margin-bottom: 2mm; font-size: 13px; }
+        p, li, td, th { font-size: 10px; line-height: 1.5; }
+        .lead { max-width: 155mm; color: var(--muted); font-size: 13px; line-height: 1.55; }
+        .muted { color: var(--muted); }
+        .gold { color: var(--gold-dark); }
+        .green { color: var(--green); }
+        .red { color: var(--red); }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5mm; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4mm; }
+        .card { border: 1px solid var(--line); border-radius: 5mm; padding: 5mm; background: rgba(255,255,255,.72); }
+        .card.soft { background: var(--soft); }
+        .card.gold-bg { border-color: #e8c86c; background: #fff9e7; }
+        .card.green-bg { border-color: #afd9c3; background: #effaf4; }
+        .card.red-bg { border-color: #efbdc0; background: #fff3f3; }
+        .number { display: inline-grid; place-items: center; width: 8mm; height: 8mm; border-radius: 50%; background: var(--gold); color: #1d1b18; font-size: 11px; font-weight: 800; }
+        .pill { display: inline-block; margin: 0 1.5mm 1.5mm 0; border: 1px solid var(--line); border-radius: 99px; padding: 1.6mm 3mm; background: white; font-size: 8px; font-weight: 700; }
+        ul.clean { margin: 0; padding: 0; list-style: none; }
+        ul.clean li { position: relative; margin-bottom: 2.5mm; padding-left: 5mm; }
+        ul.clean li::before { content: ""; position: absolute; left: 0; top: 1.8mm; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: var(--gold); }
+        table { width: 100%; border-collapse: collapse; }
+        th { padding: 2.5mm; color: var(--muted); background: var(--soft); font-size: 8px; letter-spacing: .06em; text-align: left; text-transform: uppercase; }
+        td { padding: 2.7mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+        .quote { border-left: 3px solid var(--gold); padding: 4mm 5mm; border-radius: 0 4mm 4mm 0; background: #fff8e3; font-size: 13px; font-weight: 650; line-height: 1.55; }
+        .section-head { display: flex; align-items: center; gap: 4mm; margin-bottom: 6mm; }
+        .section-icon { display: grid; place-items: center; width: 12mm; height: 12mm; border-radius: 4mm; background: #f7e9bd; color: var(--gold-dark); font-weight: 900; }
+        .section-head h2 { margin: 0; }
+        .timeline { position: relative; margin-left: 3mm; padding-left: 8mm; border-left: 2px solid #e2c46a; }
+        .timeline article { position: relative; margin-bottom: 5mm; }
+        .timeline article::before { content: ""; position: absolute; left: -10.2mm; top: 1mm; width: 4mm; height: 4mm; border: 2px solid var(--paper); border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 1px #d7b34c; }
+        .role { display: flex; align-items: flex-start; gap: 3mm; }
+        .role-mark { width: 3mm; height: 3mm; margin-top: 1.4mm; flex: 0 0 auto; border-radius: 50%; }
+        .note { border-radius: 4mm; padding: 3.5mm 4mm; background: #1d1b18; color: white; font-size: 9px; line-height: 1.5; }
+        .check { display: grid; grid-template-columns: 5mm 1fr; gap: 2mm; margin-bottom: 2.3mm; font-size: 10px; }
+        .check b { color: var(--green); }
+        .diagram { width: 100%; border: 1px solid var(--line); border-radius: 5mm; background: white; }
+        .cover { padding: 0; color: white; background: #1c1a17; }
+        .cover .hero { position: relative; z-index: 2; display: flex; min-height: 297mm; flex-direction: column; padding: 25mm 20mm 18mm; }
+        .cover::before { content: ""; position: absolute; right: -45mm; top: 42mm; width: 135mm; height: 135mm; border: 1px solid rgba(255,255,255,.10); border-radius: 50%; box-shadow: 0 0 0 25mm rgba(255,255,255,.025), 0 0 0 50mm rgba(255,255,255,.018); }
+        .brand { display: flex; align-items: center; gap: 4mm; }
+        .brand img { width: 19mm; height: 19mm; border-radius: 50%; background: white; object-fit: contain; }
+        .brand strong { display: block; font-size: 16px; }
+        .brand span { display: block; margin-top: 1mm; color: #efc95f; font-size: 8px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+        .cover-copy { margin: auto 0; max-width: 160mm; }
+        .cover h1 { max-width: 160mm; margin: 0 0 8mm; font-size: 46px; }
+        .cover .subtitle { max-width: 140mm; color: #d0cbc2; font-size: 16px; line-height: 1.6; }
+        .cover-meta { display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.15); padding-top: 5mm; color: #aaa49a; font-size: 9px; }
+        .speaker { border: 1px dashed #ccb461; border-radius: 4mm; padding: 4mm; background: #fffdf4; }
+        .speaker::before { content: "À DIRE"; display: block; margin-bottom: 2mm; color: var(--gold-dark); font-size: 7px; font-weight: 900; letter-spacing: .14em; }
+        .page-tag { position: absolute; top: 11mm; right: 17mm; color: #9c9588; font-size: 8px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .compact td { padding: 2mm 2.5mm; font-size: 9px; }
+        .compact th { padding: 2mm 2.5mm; font-size: 7px; }
+        @media print { body { background: none; } .page { margin: 0; } }
+    </style>
+</head>
+<body>
+    <section class="page cover">
+        <div class="tricolor"><i></i><i></i><i></i></div>
+        <div class="hero">
+            <div class="brand">
+                <img src="../public/images/logo-tresor-public.png" alt="Logo Trésor Public">
+                <div><strong>Trésor Public du Sénégal</strong><span>DISC Digital</span></div>
+            </div>
+            <div class="cover-copy">
+                <p class="eyebrow" style="color:#efc95f">Dossier de préparation client</p>
+                <h1>Présenter la plateforme avec une vision métier claire</h1>
+                <p class="subtitle">Argumentaire, parcours de démonstration, diagrammes de cas d’utilisation et workflow de traitement du courrier.</p>
+                <div style="margin-top:12mm">
+                    <span class="pill" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:white">Pilotage des délais</span>
+                    <span class="pill" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:white">Traçabilité</span>
+                    <span class="pill" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:white">Circuit hiérarchique</span>
+                    <span class="pill" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:white">Aide à la décision</span>
+                </div>
+            </div>
+            <div class="cover-meta"><span>Version de préparation — 16 octobre 2026</span><span>Document confidentiel de travail</span></div>
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">01 · Compréhension du besoin</span>
+        <p class="eyebrow">Commencer par le problème métier</p>
+        <h1>Montrer que le projet a été compris</h1>
+        <p class="lead">DISC Digital n’est pas une simple transposition du classeur Excel. La plateforme organise la responsabilité, les délais et la preuve de traitement autour de chaque courrier.</p>
+        <div class="quote">« Votre besoin n’est pas seulement de remplacer Excel par un écran. Il s’agit de sécuriser tout le circuit du courrier, de savoir qui doit agir, dans quel délai, et de conserver la preuve de chaque décision. »</div>
+        <div class="grid-2" style="margin-top:7mm">
+            <div class="card">
+                <h3>Situation de départ</h3>
+                <ul class="clean">
+                    <li>Suivi reposant principalement sur un fichier partagé.</li>
+                    <li>Lecture difficile des priorités et des retards.</li>
+                    <li>Affectations et relances parfois dispersées.</li>
+                    <li>Historique de décision peu immédiat.</li>
+                    <li>Dépendance à la connaissance individuelle des dossiers.</li>
+                </ul>
+            </div>
+            <div class="card gold-bg">
+                <h3>Réponse apportée</h3>
+                <ul class="clean">
+                    <li>Base MySQL unique et centralisée.</li>
+                    <li>Reprise des 170 courriers historiques.</li>
+                    <li>Files de travail adaptées à chaque rôle.</li>
+                    <li>Alertes vertes, jaunes et rouges.</li>
+                    <li>Historique horodaté de toutes les actions.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid-3" style="margin-top:6mm">
+            <div class="card soft"><p class="eyebrow">Maîtriser</p><h3>Le flux</h3><p class="muted">De l’arrivée à la signature, sans rupture d’information.</p></div>
+            <div class="card soft"><p class="eyebrow">Responsabiliser</p><h3>Les acteurs</h3><p class="muted">Une action visible, attribuée et datée pour chaque profil.</p></div>
+            <div class="card soft"><p class="eyebrow">Décider</p><h3>À temps</h3><p class="muted">Les urgences remontent avant que les délais ne soient perdus.</p></div>
+        </div>
+        <div class="speaker" style="margin-top:6mm">Insister sur la continuité : les données Excel ne sont pas abandonnées. Elles sont reprises dans un dispositif plus fiable, consultable et évolutif.</div>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>2</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">02 · Déroulé recommandé</span>
+        <p class="eyebrow">Une démonstration orientée valeur</p>
+        <h1>Commencer par le Directeur</h1>
+        <p class="lead">Le profil Directeur donne immédiatement le sens du projet : voir les priorités, superviser le circuit et décider. L’administration technique vient seulement à la fin.</p>
+        <div class="timeline" style="margin-top:8mm">
+            <article><h3><span class="gold">1 — Directeur</span> · Vue d’ensemble</h3><p>Tableau de bord, priorités, retards, courriers à signer et historique d’un dossier.</p></article>
+            <article><h3><span class="gold">2 — Secrétariat</span> · Entrée du courrier</h3><p>Enregistrement, numéro DISC, type, délai automatique et première orientation.</p></article>
+            <article><h3><span class="gold">3 — Directeur / Chef de division</span> · Affectation</h3><p>Affectation individuelle ou en masse, instructions, résumé avant confirmation et annulation immédiate.</p></article>
+            <article><h3><span class="gold">4 — Agent</span> · Traitement opérationnel</h3><p>File personnelle, consultation des instructions, pièces jointes et soumission du projet de réponse.</p></article>
+            <article><h3><span class="gold">5 — Chef de division</span> · Contrôle</h3><p>Validation du travail ou demande de correction motivée.</p></article>
+            <article><h3><span class="gold">6 — Directeur</span> · Décision finale</h3><p>Signature, clôture, observation du délai et conservation de la traçabilité.</p></article>
+            <article><h3><span class="gold">7 — Auditeur / Administrateur</span> · Contrôle et paramétrage</h3><p>Rapports, exports, comptes, divisions, types, seuils d’alerte et import Excel.</p></article>
+        </div>
+        <table style="margin-top:5mm">
+            <thead><tr><th>Durée</th><th>Séquence</th><th>Résultat attendu</th></tr></thead>
+            <tbody>
+                <tr><td>3 min</td><td>Problème et objectifs</td><td>Le client reconnaît son besoin.</td></tr>
+                <tr><td>20 min</td><td>Circuit complet par profils</td><td>Le client voit le fonctionnement réel.</td></tr>
+                <tr><td>4 min</td><td>Rapports, sécurité et aide</td><td>Le client perçoit la gouvernance.</td></tr>
+                <tr><td>3 min</td><td>Questions et prochaines étapes</td><td>Les décisions attendues sont clarifiées.</td></tr>
+            </tbody>
+        </table>
+        <div class="note" style="margin-top:5mm">Règle de présentation : toujours relier un écran à un risque métier évité. Exemple : « Cette file évite qu’un courrier en attente de validation soit oublié. »</div>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>3</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">03 · Cas d’utilisation</span>
+        <p class="eyebrow">Vision fonctionnelle</p>
+        <h1>Diagramme global des cas d’utilisation</h1>
+        <svg class="diagram" viewBox="0 0 760 690" role="img" aria-label="Diagramme des cas d’utilisation de DISC Digital">
+            <defs>
+                <style>
+                    .sys{fill:#fffdf8;stroke:#d8cbb5;stroke-width:2}.uc{fill:#fff;stroke:#d6a329;stroke-width:2}.actor{stroke:#292621;stroke-width:2;fill:none}.link{stroke:#9b9387;stroke-width:1.4}.tx{font:600 12px 'Segoe UI',Arial;fill:#24211d}.sm{font:10px 'Segoe UI',Arial;fill:#615b52}.title{font:700 14px 'Segoe UI',Arial;fill:#996b09}
+                </style>
+            </defs>
+            <rect x="135" y="28" width="490" height="632" rx="20" class="sys"/><text x="380" y="53" text-anchor="middle" class="title">SYSTÈME DISC DIGITAL</text>
+            <!-- acteurs gauche -->
+            <g transform="translate(58,92)" class="actor"><circle cx="0" cy="0" r="10"/><path d="M0 10v35M-18 22h36M0 45l-16 25M0 45l16 25"/></g><text x="58" y="176" text-anchor="middle" class="tx">Secrétariat</text>
+            <g transform="translate(58,298)" class="actor"><circle cx="0" cy="0" r="10"/><path d="M0 10v35M-18 22h36M0 45l-16 25M0 45l16 25"/></g><text x="58" y="382" text-anchor="middle" class="tx">Agent</text>
+            <g transform="translate(58,510)" class="actor"><circle cx="0" cy="0" r="10"/><path d="M0 10v35M-18 22h36M0 45l-16 25M0 45l16 25"/></g><text x="58" y="594" text-anchor="middle" class="tx">Auditeur</text>
+            <!-- acteurs droite -->
+            <g transform="translate(700,92)" class="actor"><circle cx="0" cy="0" r="10"/><path d="M0 10v35M-18 22h36M0 45l-16 25M0 45l16 25"/></g><text x="700" y="176" text-anchor="middle" class="tx">Directeur</text>
+            <g transform="translate(700,298)" class="actor"><circle cx="0" cy="0" r="10"/><path d="M0 10v35M-18 22h36M0 45l-16 25M0 45l16 25"/></g><text x="700" y="382" text-anchor="middle" class="tx">Chef division</text>
+            <g transform="translate(700,510)" class="actor"><circle cx="0" cy="0" r="10"/><path d="M0 10v35M-18 22h36M0 45l-16 25M0 45l16 25"/></g><text x="700" y="594" text-anchor="middle" class="tx">Administrateur</text>
+            <!-- use cases -->
+            <ellipse cx="380" cy="92" rx="104" ry="27" class="uc"/><text x="380" y="96" text-anchor="middle" class="tx">S’authentifier</text>
+            <ellipse cx="260" cy="170" rx="96" ry="29" class="uc"/><text x="260" y="168" text-anchor="middle" class="tx">Enregistrer un courrier</text><text x="260" y="182" text-anchor="middle" class="sm">et ajouter les pièces</text>
+            <ellipse cx="500" cy="170" rx="94" ry="29" class="uc"/><text x="500" y="168" text-anchor="middle" class="tx">Piloter les priorités</text><text x="500" y="182" text-anchor="middle" class="sm">et les délais</text>
+            <ellipse cx="380" cy="255" rx="116" ry="31" class="uc"/><text x="380" y="254" text-anchor="middle" class="tx">Affecter division / agent</text><text x="380" y="269" text-anchor="middle" class="sm">individuellement ou en masse</text>
+            <ellipse cx="260" cy="350" rx="100" ry="29" class="uc"/><text x="260" y="348" text-anchor="middle" class="tx">Traiter et soumettre</text><text x="260" y="362" text-anchor="middle" class="sm">le projet de réponse</text>
+            <ellipse cx="500" cy="350" rx="102" ry="29" class="uc"/><text x="500" y="348" text-anchor="middle" class="tx">Valider ou demander</text><text x="500" y="362" text-anchor="middle" class="sm">une correction</text>
+            <ellipse cx="500" cy="438" rx="92" ry="27" class="uc"/><text x="500" y="442" text-anchor="middle" class="tx">Signer et clôturer</text>
+            <ellipse cx="260" cy="438" rx="96" ry="27" class="uc"/><text x="260" y="442" text-anchor="middle" class="tx">Consulter l’historique</text>
+            <ellipse cx="315" cy="535" rx="96" ry="29" class="uc"/><text x="315" y="533" text-anchor="middle" class="tx">Consulter / exporter</text><text x="315" y="547" text-anchor="middle" class="sm">les rapports</text>
+            <ellipse cx="500" cy="535" rx="92" ry="29" class="uc"/><text x="500" y="533" text-anchor="middle" class="tx">Gérer les référentiels</text><text x="500" y="547" text-anchor="middle" class="sm">comptes, types, délais</text>
+            <ellipse cx="380" cy="615" rx="112" ry="27" class="uc"/><text x="380" y="619" text-anchor="middle" class="tx">Recevoir des notifications</text>
+            <!-- links -->
+            <path d="M76 112L278 92M76 125L180 165M76 140L270 250" class="link"/>
+            <path d="M76 315L160 345M76 330L280 260M76 347L270 610" class="link"/>
+            <path d="M76 530L165 440M76 548L220 535" class="link"/>
+            <path d="M682 112L482 92M682 127L590 168M682 142L490 250M682 155L580 434" class="link"/>
+            <path d="M682 315L598 345M682 330L492 260M682 348L490 610" class="link"/>
+            <path d="M682 530L594 535M682 548L415 535M682 565L488 610" class="link"/>
+        </svg>
+        <p class="muted" style="margin-top:3mm">Lecture : chaque acteur accède uniquement aux cas d’utilisation autorisés par son rôle et par son périmètre de visibilité.</p>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>4</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">04 · Responsabilités</span>
+        <p class="eyebrow">Séparation des rôles</p>
+        <h1>Qui fait quoi dans la plateforme ?</h1>
+        <table class="compact">
+            <thead><tr><th>Profil</th><th>Responsabilité métier</th><th>Actions principales</th><th>Valeur démontrée</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Directeur</strong></td><td>Piloter et décider</td><td>Superviser, affecter, consulter les priorités, signer et clôturer.</td><td>Vision consolidée et arbitrage rapide.</td></tr>
+                <tr><td><strong>Secrétariat</strong></td><td>Fiabiliser l’entrée</td><td>Enregistrer, renseigner les références, joindre les documents, orienter.</td><td>Aucune arrivée sans numéro ni trace.</td></tr>
+                <tr><td><strong>Chef de division</strong></td><td>Organiser et contrôler</td><td>Affecter aux agents, vérifier, valider ou demander une correction.</td><td>Respect du contrôle hiérarchique.</td></tr>
+                <tr><td><strong>Agent</strong></td><td>Produire la réponse</td><td>Consulter ses dossiers, traiter, joindre les livrables et soumettre.</td><td>File personnelle claire et responsabilisation.</td></tr>
+                <tr><td><strong>Auditeur</strong></td><td>Contrôler la conformité</td><td>Consulter les dossiers autorisés, historiques et indicateurs.</td><td>Preuve, transparence et redevabilité.</td></tr>
+                <tr><td><strong>Administrateur</strong></td><td>Maintenir le dispositif</td><td>Gérer comptes, rôles, divisions, types, seuils et imports.</td><td>Autonomie de paramétrage.</td></tr>
+            </tbody>
+        </table>
+        <h2 style="margin-top:8mm">Principes d’autorisation</h2>
+        <div class="grid-2">
+            <div class="card green-bg">
+                <h3>Les actions suivent le rôle</h3>
+                <p>Un bouton n’est affiché que si l’utilisateur dispose de la permission correspondante. Le serveur contrôle à nouveau cette permission lors de l’action.</p>
+            </div>
+            <div class="card gold-bg">
+                <h3>La visibilité suit le périmètre</h3>
+                <p>L’agent retrouve ses dossiers, le chef sa division, tandis que la Direction dispose de la vision nécessaire au pilotage.</p>
+            </div>
+            <div class="card">
+                <h3>Les courriers confidentiels sont limités</h3>
+                <p>Leur visibilité est resserrée afin de protéger les informations sensibles et d’éviter une consultation générale.</p>
+            </div>
+            <div class="card">
+                <h3>L’historique ne dépend pas de la mémoire</h3>
+                <p>Chaque étape enregistre l’auteur, la date, l’ancien statut, le nouveau statut et le commentaire éventuel.</p>
+            </div>
+        </div>
+        <div class="speaker" style="margin-top:6mm">« Le système ne remplace pas l’organisation de la DISC : il la formalise, sécurise les responsabilités et rend le circuit mesurable. »</div>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>5</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">05 · Workflow métier</span>
+        <p class="eyebrow">Cycle de traitement</p>
+        <h1>Schéma du workflow principal</h1>
+        <svg class="diagram" viewBox="0 0 760 760" role="img" aria-label="Workflow de traitement d’un courrier DISC">
+            <defs>
+                <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#81796d"/></marker>
+                <style>.a{stroke:#81796d;stroke-width:2;fill:none;marker-end:url(#arr)}.b{fill:#fff;stroke:#d6a329;stroke-width:2}.g{fill:#effaf4;stroke:#00853f;stroke-width:2}.r{fill:#fff2f2;stroke:#e31b23;stroke-width:2}.n{font:700 13px 'Segoe UI',Arial;fill:#26221d}.s{font:10px 'Segoe UI',Arial;fill:#665f55}.lane{fill:#f5f1e8;stroke:#e3dbcd;stroke-width:1}.lt{font:700 10px 'Segoe UI',Arial;fill:#8d6a13;letter-spacing:1px}</style>
+            </defs>
+            <rect x="15" y="20" width="730" height="112" rx="16" class="lane"/><text x="34" y="43" class="lt">SECRÉTARIAT</text>
+            <rect x="15" y="148" width="730" height="112" rx="16" class="lane"/><text x="34" y="171" class="lt">DIRECTION / ORIENTATION</text>
+            <rect x="15" y="276" width="730" height="210" rx="16" class="lane"/><text x="34" y="299" class="lt">DIVISION &amp; AGENT</text>
+            <rect x="15" y="502" width="730" height="112" rx="16" class="lane"/><text x="34" y="525" class="lt">DIRECTION / DÉCISION</text>
+            <rect x="15" y="630" width="730" height="105" rx="16" class="lane"/><text x="34" y="653" class="lt">ARCHIVAGE &amp; PILOTAGE</text>
+            <!-- nodes -->
+            <rect x="85" y="58" width="180" height="52" rx="14" class="b"/><text x="175" y="80" text-anchor="middle" class="n">Courrier reçu</text><text x="175" y="96" text-anchor="middle" class="s">Enregistrement + numéro DISC</text>
+            <rect x="485" y="58" width="190" height="52" rx="14" class="b"/><text x="580" y="80" text-anchor="middle" class="n">Qualification</text><text x="580" y="96" text-anchor="middle" class="s">Type, délai, pièce et objet</text>
+            <path d="M265 84H482" class="a"/>
+            <rect x="285" y="184" width="190" height="52" rx="14" class="b"/><text x="380" y="206" text-anchor="middle" class="n">Affectation à la division</text><text x="380" y="222" text-anchor="middle" class="s">Individuelle ou en masse</text>
+            <path d="M580 110V144Q580 157 566 157H394Q380 157 380 181" class="a"/>
+            <rect x="85" y="326" width="180" height="52" rx="14" class="b"/><text x="175" y="348" text-anchor="middle" class="n">Affectation à l’agent</text><text x="175" y="364" text-anchor="middle" class="s">Instructions + date d’imputation</text>
+            <rect x="485" y="326" width="190" height="52" rx="14" class="b"/><text x="580" y="348" text-anchor="middle" class="n">Traitement par l’agent</text><text x="580" y="364" text-anchor="middle" class="s">Projet de réponse + pièces</text>
+            <path d="M380 236V274Q380 294 360 294H175Q175 294 175 323" class="a"/><path d="M265 352H482" class="a"/>
+            <rect x="285" y="414" width="190" height="52" rx="14" class="b"/><text x="380" y="436" text-anchor="middle" class="n">Contrôle du Chef</text><text x="380" y="452" text-anchor="middle" class="s">Valider ou demander correction</text>
+            <path d="M580 378V398Q580 410 565 410H478" class="a"/>
+            <rect x="62" y="414" width="160" height="52" rx="14" class="r"/><text x="142" y="436" text-anchor="middle" class="n">Correction demandée</text><text x="142" y="452" text-anchor="middle" class="s">Motif tracé dans l’historique</text>
+            <path d="M282 440H225" class="a"/><path d="M142 411V391Q142 386 160 386H560Q580 386 580 381" class="a"/>
+            <rect x="285" y="538" width="190" height="52" rx="14" class="g"/><text x="380" y="560" text-anchor="middle" class="n">Signature du Directeur</text><text x="380" y="576" text-anchor="middle" class="s">Décision et date effective</text>
+            <path d="M380 466V535" class="a"/><text x="392" y="503" class="s">Projet validé</text>
+            <rect x="85" y="666" width="180" height="48" rx="14" class="g"/><text x="175" y="687" text-anchor="middle" class="n">Courrier clôturé</text><text x="175" y="702" text-anchor="middle" class="s">Résultat du délai calculé</text>
+            <rect x="485" y="666" width="190" height="48" rx="14" class="g"/><text x="580" y="687" text-anchor="middle" class="n">Rapports &amp; audit</text><text x="580" y="702" text-anchor="middle" class="s">Indicateurs et historique</text>
+            <path d="M380 590V634Q380 650 360 650H175Q175 650 175 663" class="a"/><path d="M265 690H482" class="a"/>
+            <!-- overlay alerts -->
+            <rect x="610" y="184" width="112" height="78" rx="14" fill="#1d1b18"/><text x="666" y="205" text-anchor="middle" style="font:700 10px 'Segoe UI';fill:#efc95f">ALERTES CONTINUES</text><circle cx="632" cy="225" r="5" fill="#18a558"/><text x="644" y="228" class="s" style="fill:white">Dans les temps</text><circle cx="632" cy="242" r="5" fill="#e4a11b"/><text x="644" y="245" class="s" style="fill:white">Vigilance</text><circle cx="632" cy="259" r="5" fill="#e31b23"/><text x="644" y="262" class="s" style="fill:white">Prioritaire</text>
+        </svg>
+        <div class="note" style="margin-top:4mm">Cas particulier : un type ne nécessitant pas de réponse peut être clôturé dès l’enregistrement. Les alertes accompagnent le dossier ; elles ne remplacent pas son statut.</div>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>6</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">06 · Statuts & alertes</span>
+        <p class="eyebrow">Lire la situation en quelques secondes</p>
+        <h1>Deux informations complémentaires</h1>
+        <div class="grid-2">
+            <div class="card">
+                <h2>Le statut répond à : « Où en est le courrier ? »</h2>
+                <div class="timeline" style="margin-top:5mm">
+                    <article><h3>Enregistré</h3><p>Le courrier existe mais attend son orientation.</p></article>
+                    <article><h3>Affecté à la division</h3><p>La structure responsable est identifiée.</p></article>
+                    <article><h3>Affecté à l’agent</h3><p>Un responsable opérationnel est désigné.</p></article>
+                    <article><h3>En attente de validation</h3><p>Le projet produit attend le contrôle du Chef.</p></article>
+                    <article><h3>Correction demandée</h3><p>Le dossier revient à l’agent avec un motif.</p></article>
+                    <article><h3>Validé par la division</h3><p>Le projet est transmis au Directeur.</p></article>
+                    <article><h3>Signé / clôturé</h3><p>Le cycle métier est terminé.</p></article>
+                </div>
+            </div>
+            <div>
+                <div class="card green-bg" style="margin-bottom:4mm"><h2 class="green">Vert</h2><h3>Traitement dans les temps</h3><p>Le délai consommé reste inférieur au premier seuil configuré.</p></div>
+                <div class="card gold-bg" style="margin-bottom:4mm"><h2 class="gold">Jaune</h2><h3>Échéance proche</h3><p>Une relance ou une vérification d’avancement devient nécessaire.</p></div>
+                <div class="card red-bg"><h2 class="red">Rouge</h2><h3>Intervention prioritaire</h3><p>Le délai est fortement consommé ou dépassé. Le courrier doit remonter dans les priorités.</p></div>
+                <div class="speaker" style="margin-top:5mm">« Un courrier peut être “affecté à un agent” et déjà en alerte rouge. Le statut indique l’étape ; la couleur indique l’urgence. »</div>
+            </div>
+        </div>
+        <h2 style="margin-top:7mm">Centre de notifications</h2>
+        <p class="lead" style="font-size:11px">Les notifications sont organisées pour éviter un flux illisible : <strong>Non lues</strong>, <strong>Actions</strong>, <strong>Délais</strong>, <strong>Validations</strong>, <strong>Lues</strong> et <strong>Toutes</strong>.</p>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>7</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">07 · Scénario de démonstration</span>
+        <p class="eyebrow">Fil rouge conseillé</p>
+        <h1>Un dossier concret, du début à la fin</h1>
+        <div class="card gold-bg">
+            <p class="eyebrow">Courrier exemple</p>
+            <h2>Demande de transmission de l’état financier trimestriel</h2>
+            <p><strong>Origine :</strong> Ministère de tutelle &nbsp;·&nbsp; <strong>Type :</strong> Courrier ordinaire avec réponse &nbsp;·&nbsp; <strong>Priorité :</strong> Suivi des délais</p>
+        </div>
+        <table style="margin-top:6mm">
+            <thead><tr><th>Étape</th><th>Ce que tu fais</th><th>Ce que tu expliques au client</th></tr></thead>
+            <tbody>
+                <tr><td><span class="number">1</span></td><td>Ouvrir le tableau de bord Directeur.</td><td>La Direction voit immédiatement les urgences et les décisions attendues.</td></tr>
+                <tr><td><span class="number">2</span></td><td>Se connecter comme Secrétariat et créer le dossier.</td><td>Le numéro DISC, les délais et l’historique naissent dès l’arrivée.</td></tr>
+                <tr><td><span class="number">3</span></td><td>Affecter la division puis l’agent.</td><td>La responsabilité et la date d’imputation ne sont plus implicites.</td></tr>
+                <tr><td><span class="number">4</span></td><td>Ouvrir « Mes courriers » comme Agent et soumettre.</td><td>L’agent travaille dans une file ciblée et suit les instructions reçues.</td></tr>
+                <tr><td><span class="number">5</span></td><td>Demander une correction comme Chef de division.</td><td>Le retour est motivé, daté et visible dans l’historique.</td></tr>
+                <tr><td><span class="number">6</span></td><td>Corriger puis valider le projet.</td><td>Le contrôle hiérarchique est respecté sans échanges dispersés.</td></tr>
+                <tr><td><span class="number">7</span></td><td>Signer comme Directeur.</td><td>La clôture permet de calculer le résultat réel du délai.</td></tr>
+                <tr><td><span class="number">8</span></td><td>Afficher le rapport et exporter.</td><td>La donnée opérationnelle devient un outil de pilotage.</td></tr>
+            </tbody>
+        </table>
+        <div class="grid-2" style="margin-top:6mm">
+            <div class="card"><h3>Préparer plusieurs états</h3><p>Créer à l’avance un courrier enregistré, un affecté, un à valider, un à signer et un en retard. La démonstration reste fluide même si une étape dépend d’un autre profil.</p></div>
+            <div class="card"><h3>Préparer les sessions</h3><p>Ouvrir chaque profil dans une fenêtre privée ou un navigateur différent et nommer clairement les fenêtres.</p></div>
+        </div>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>8</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">08 · Discours par profil</span>
+        <p class="eyebrow">Formulations prêtes à l’emploi</p>
+        <h1>Ce qu’il faut dire pendant la démonstration</h1>
+        <div class="grid-2">
+            <div class="card">
+                <div class="role"><i class="role-mark" style="background:#d6a329"></i><div><h3>Directeur</h3><p>« Vous n’avez pas à parcourir 170 lignes. La plateforme vous présente les dossiers qui nécessitent une décision, une signature ou une intervention urgente. »</p></div></div>
+            </div>
+            <div class="card">
+                <div class="role"><i class="role-mark" style="background:#278acb"></i><div><h3>Secrétariat</h3><p>« Toute arrivée reçoit un numéro DISC et devient immédiatement traçable. Le type sélectionné détermine les délais applicables. »</p></div></div>
+            </div>
+            <div class="card">
+                <div class="role"><i class="role-mark" style="background:#7b55c7"></i><div><h3>Chef de division</h3><p>« Le Chef répartit le travail, contrôle les productions et peut renvoyer une correction sans perdre le contexte. »</p></div></div>
+            </div>
+            <div class="card">
+                <div class="role"><i class="role-mark" style="background:#00853f"></i><div><h3>Agent</h3><p>« L’agent retrouve uniquement les courriers qui lui sont confiés, leurs instructions, leurs pièces et les corrections attendues. »</p></div></div>
+            </div>
+            <div class="card">
+                <div class="role"><i class="role-mark" style="background:#d64a52"></i><div><h3>Auditeur</h3><p>« L’auditeur peut vérifier le parcours d’un dossier sans modifier les informations opérationnelles. »</p></div></div>
+            </div>
+            <div class="card">
+                <div class="role"><i class="role-mark" style="background:#3d3934"></i><div><h3>Administrateur</h3><p>« L’organisation reste autonome pour gérer les comptes, divisions, types, délais, seuils d’alerte et imports. »</p></div></div>
+            </div>
+        </div>
+        <h2 style="margin-top:7mm">Fonctions transversales à montrer</h2>
+        <div class="grid-3">
+            <div class="card soft"><h3>Mobile</h3><p>Les grands tableaux deviennent des cartes lisibles sur petit écran.</p></div>
+            <div class="card soft"><h3>Recherche</h3><p>Référence, objet ou service, avec accès rapide aux files de travail.</p></div>
+            <div class="card soft"><h3>Aide</h3><p>Guide accessible avant et après connexion, organisé par sujet.</p></div>
+            <div class="card soft"><h3>Affectation en masse</h3><p>Résumé avant confirmation et annulation sécurisée pendant 5 minutes.</p></div>
+            <div class="card soft"><h3>Navigation</h3><p>Précédent / suivant directement depuis la fiche d’un courrier.</p></div>
+            <div class="card soft"><h3>Export</h3><p>Extraction CSV et préparation d’une impression PDF des rapports.</p></div>
+        </div>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>9</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">09 · Preuves & gouvernance</span>
+        <p class="eyebrow">Confiance dans le dispositif</p>
+        <h1>Traçabilité, sécurité et pilotage</h1>
+        <div class="grid-2">
+            <div class="card green-bg">
+                <h2>Traçabilité complète</h2>
+                <ul class="clean"><li>Création et numéro DISC.</li><li>Affectations individuelles et groupées.</li><li>Soumission, validation ou correction.</li><li>Signature et clôture.</li><li>Auteur, date et commentaire associés.</li></ul>
+            </div>
+            <div class="card">
+                <h2>Accès maîtrisés</h2>
+                <ul class="clean"><li>Authentification obligatoire.</li><li>Comptes activables ou désactivables.</li><li>Permissions contrôlées côté serveur.</li><li>Périmètre de visibilité par rôle.</li><li>Pièces jointes téléchargées via un accès contrôlé.</li></ul>
+            </div>
+            <div class="card">
+                <h2>Qualité des données</h2>
+                <ul class="clean"><li>Référentiels de divisions et de types.</li><li>Délais définis selon le type.</li><li>Contrôles lors des affectations.</li><li>Prévisualisation avant import Excel.</li><li>Doublons et lignes invalides signalés.</li></ul>
+            </div>
+            <div class="card gold-bg">
+                <h2>Pilotage</h2>
+                <ul class="clean"><li>Volumes par division, type et statut.</li><li>Courriers en cours ou clôturés.</li><li>Retards et niveau de conformité.</li><li>Filtres par période et périmètre.</li><li>Export pour analyses complémentaires.</li></ul>
+            </div>
+        </div>
+        <h2 style="margin-top:8mm">Points à cadrer avant la production</h2>
+        <table>
+            <thead><tr><th>Sujet</th><th>Décision attendue</th></tr></thead>
+            <tbody>
+                <tr><td>Hébergement et nom de domaine</td><td>Environnement cible, accès réseau et certificat HTTPS.</td></tr>
+                <tr><td>Messagerie</td><td>Paramètres SMTP et règles d’envoi des notifications email.</td></tr>
+                <tr><td>Sauvegardes</td><td>Fréquence, durée de conservation et procédure de restauration.</td></tr>
+                <tr><td>Comptes réels</td><td>Liste validée des utilisateurs, rôles et rattachements.</td></tr>
+                <tr><td>Recette métier</td><td>Scénarios validés par les représentants de chaque profil.</td></tr>
+            </tbody>
+        </table>
+        <div class="speaker" style="margin-top:5mm">Présenter ces points comme des décisions de mise en production, pas comme des fonctions déjà configurées. La transparence renforce la crédibilité.</div>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>10</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">10 · Questions client</span>
+        <p class="eyebrow">Anticiper les échanges</p>
+        <h1>Réponses courtes aux questions probables</h1>
+        <table class="compact">
+            <thead><tr><th>Question</th><th>Réponse proposée</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Que deviennent nos données Excel ?</strong></td><td>Les 170 courriers ont été repris. L’import comprend une phase de prévisualisation et de contrôle avant écriture.</td></tr>
+                <tr><td><strong>Un agent voit-il tous les courriers ?</strong></td><td>Non. La visibilité dépend du rôle et de l’affectation. Les contrôles sont appliqués côté serveur.</td></tr>
+                <tr><td><strong>Peut-on savoir qui a modifié un dossier ?</strong></td><td>Oui. L’historique conserve l’action, l’auteur, la date, les statuts et le commentaire.</td></tr>
+                <tr><td><strong>Comment éviter les retards ?</strong></td><td>Les délais sont calculés selon le type et remontent par alertes, files prioritaires et notifications.</td></tr>
+                <tr><td><strong>Peut-on traiter plusieurs courriers ?</strong></td><td>Oui. L’affectation en masse permet de sélectionner plusieurs dossiers, vérifier un résumé et annuler immédiatement si nécessaire.</td></tr>
+                <tr><td><strong>L’application fonctionne-t-elle sur téléphone ?</strong></td><td>Oui. Les tableaux deviennent des cartes et les actions sont adaptées aux petits écrans.</td></tr>
+                <tr><td><strong>Peut-on sortir des rapports ?</strong></td><td>Oui. Les données sont filtrables, imprimables et exportables au format CSV.</td></tr>
+                <tr><td><strong>Peut-on modifier les délais ?</strong></td><td>Oui. L’administrateur configure les délais par type et les seuils d’alerte. Les dossiers historiques gardent leurs valeurs.</td></tr>
+                <tr><td><strong>Que faire en cas de difficulté ?</strong></td><td>Un centre d’aide public explique la connexion, les rôles, le workflow et le dépannage.</td></tr>
+            </tbody>
+        </table>
+        <div class="grid-2" style="margin-top:7mm">
+            <div class="card red-bg"><h3>À éviter</h3><p>Promettre une intégration, un envoi email ou un hébergement qui n’a pas encore été configuré et testé dans l’environnement du client.</p></div>
+            <div class="card green-bg"><h3>À privilégier</h3><p>Répondre par un scénario concret, montrer l’écran concerné et distinguer clairement « déjà opérationnel » de « prochaine étape ».</p></div>
+        </div>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>11</span></div>
+    </section>
+
+    <section class="page">
+        <div class="tricolor"><i></i><i></i><i></i></div><span class="page-tag">11 · Checklist finale</span>
+        <p class="eyebrow">Avant d’entrer en salle</p>
+        <h1>Sécuriser la démonstration</h1>
+        <div class="grid-2">
+            <div class="card">
+                <h2>Application</h2>
+                <div class="check"><b>□</b><span>Tester la connexion de chaque profil.</span></div>
+                <div class="check"><b>□</b><span>Préparer les courriers à différents statuts.</span></div>
+                <div class="check"><b>□</b><span>Réinitialiser les filtres et files de travail.</span></div>
+                <div class="check"><b>□</b><span>Vérifier les pièces jointes de démonstration.</span></div>
+                <div class="check"><b>□</b><span>Tester l’affectation et son annulation.</span></div>
+                <div class="check"><b>□</b><span>Préparer un rapport et un export CSV.</span></div>
+            </div>
+            <div class="card">
+                <h2>Présentation</h2>
+                <div class="check"><b>□</b><span>Ouvrir les profils dans des sessions séparées.</span></div>
+                <div class="check"><b>□</b><span>Fermer les onglets et notifications personnels.</span></div>
+                <div class="check"><b>□</b><span>Tester le vidéoprojecteur et le niveau de zoom.</span></div>
+                <div class="check"><b>□</b><span>Garder ce PDF ouvert hors connexion.</span></div>
+                <div class="check"><b>□</b><span>Préparer quelques captures comme solution de secours.</span></div>
+                <div class="check"><b>□</b><span>Noter les décisions et demandes du client.</span></div>
+            </div>
+        </div>
+        <div class="card gold-bg" style="margin-top:6mm">
+            <p class="eyebrow">Phrase de conclusion</p>
+            <div class="quote" style="background:white">« DISC Digital transforme le suivi du courrier en un circuit partagé, responsable et mesurable. Chaque acteur sait quoi faire, la Direction sait où intervenir et l’organisation conserve la preuve de tout le traitement. »</div>
+        </div>
+        <h2 style="margin-top:8mm">Prochaines décisions à obtenir du client</h2>
+        <div class="grid-3">
+            <div class="card soft"><span class="number">1</span><h3 style="margin-top:3mm">Valider le workflow</h3><p>Rôles, étapes, exceptions et délais.</p></div>
+            <div class="card soft"><span class="number">2</span><h3 style="margin-top:3mm">Valider la recette</h3><p>Utilisateurs pilotes et scénarios de test.</p></div>
+            <div class="card soft"><span class="number">3</span><h3 style="margin-top:3mm">Préparer la production</h3><p>Hébergement, SMTP, sauvegardes et sécurité.</p></div>
+        </div>
+        <div class="note" style="margin-top:8mm;text-align:center;font-size:12px">Fil conducteur : Direction → Réception → Affectation → Traitement → Contrôle → Signature → Rapport</div>
+        <div class="footer"><span>DISC Digital · Guide de présentation</span><span>12</span></div>
+    </section>
+</body>
+</html>
