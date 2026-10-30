@@ -30,7 +30,7 @@ class DiscTestAgentsSeeder extends Seeder
 
     public function run(): void
     {
-        $rows = app(DiscExcelReader::class)->read(base_path(self::FILE));
+        $rows = app(DiscExcelReader::class)->read(base_path(static::FILE));
         $types = CourrierType::all()->keyBy('code');
         $divisions = Division::all()->keyBy('code');
         $secretariat = User::where('role', 'secretariat')->firstOrFail();
