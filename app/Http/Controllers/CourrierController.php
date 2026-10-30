@@ -165,7 +165,10 @@ class CourrierController extends Controller
 
     public function show(Request $request, Courrier $courrier, CourrierPresenter $presenter): Response
     {
-        $courrier->load(['type', 'division', 'assignedAgent', 'divisionValidatedBy', 'contributingDivisions', 'coAgents', 'events.user', 'attachments.uploadedBy']);
+        $courrier->load(['type', 'division', 'assignedAgent', 'divisionValidatedBy', 'contributingDivisions', 'coAgents', 'attachments.uploadedBy',
+            // Historique dans l'ordre du circuit : de l'enregistrement à la signature.
+            'events' => fn ($query) => $query->reorder()->oldest('created_at')->oldest('id')->with('user'),
+        ]);
         Gate::authorize('view', $courrier);
         $orderedCourriers = Courrier::query()
             ->visibleTo($request->user())

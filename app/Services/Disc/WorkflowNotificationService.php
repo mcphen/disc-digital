@@ -19,13 +19,14 @@ class WorkflowNotificationService
         );
     }
 
-    public function correctionRequested(Courrier $courrier): void
+    public function correctionRequested(Courrier $courrier, ?string $comment = null): void
     {
         $this->notify(
             $this->agents($courrier),
             $courrier,
             'CORRECT',
-            "Une correction est demandée sur le courrier {$courrier->registration_number}.",
+            "Une correction est demandée sur le courrier {$courrier->registration_number}."
+                .($comment ? ' Motif : '.str($comment)->squish()->limit(150) : ''),
         );
     }
 
@@ -37,7 +38,7 @@ class WorkflowNotificationService
             ->get();
 
         $this->notify(
-            $recipients->concat($this->agents($courrier))->unique('id')->values(),
+            $recipients->concat($this->agents($courrier))->concat($this->contributingHeads($courrier))->unique('id')->values(),
             $courrier,
             'APPROVED',
             "Le courrier {$courrier->registration_number} a été validé par le Chef de Division.",
@@ -56,6 +57,20 @@ class WorkflowNotificationService
             ->filter(fn (?User $user) => $user?->is_active)
             ->unique('id')
             ->values();
+    }
+
+    /**
+     * Chefs des divisions contributrices, informés de la validation du dossier qu'ils suivent.
+     *
+     * @return Collection<int, User>
+     */
+    private function contributingHeads(Courrier $courrier): Collection
+    {
+        return User::query()
+            ->where('is_active', true)
+            ->where('role', 'division_head')
+            ->whereIn('division_id', $courrier->contributingDivisions()->pluck('divisions.id'))
+            ->get();
     }
 
     /** @return Collection<int, User> */

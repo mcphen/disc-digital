@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import AlertBadge from '@/components/disc/AlertBadge.vue';
 import StatusBadge from '@/components/disc/StatusBadge.vue';
+import QuarterStrip from '@/components/pilotage/QuarterStrip.vue';
 import StandingBadge from '@/components/pilotage/StandingBadge.vue';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/AppLayout.vue';
 import type { SharedData } from '@/types';
 import type { Courrier } from '@/types/disc';
-import type { Standing } from '@/types/pilotage';
+import type { QuarterCell, Standing, Thresholds } from '@/types/pilotage';
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import { ArrowRight, BellRing, CalendarRange, Check, Clock3, FilePlus2, Inbox, ShieldCheck, Sparkles, TrendingUp } from 'lucide-vue-next';
 
@@ -36,11 +37,14 @@ defineProps<{
         scope: string;
         stage: string;
         period: string;
+        year: number;
+        quarters: QuarterCell[];
         current: { rate: number | null; on_time: number; measured: number; standing: Standing };
         previous: { label: string; rate: number | null; on_time: number; measured: number; standing: Standing };
         remaining: number;
         end_date: string;
     } | null;
+    thresholds: Thresholds;
     recentCourriers: Courrier[];
 }>();
 
@@ -200,50 +204,17 @@ const breadcrumbs = [{ title: 'Vue d’ensemble', href: '/dashboard' }];
                 /></span>
             </Link>
 
-            <div class="grid gap-5 xl:grid-cols-[0.72fr_1.28fr]">
-                <section class="rounded-[26px] border border-border/70 bg-card/80 p-6 shadow-sm backdrop-blur-xl">
-                    <div>
-                        <p class="disc-eyebrow">Performance</p>
-                        <h2 class="mt-1 text-lg font-semibold tracking-tight">Rythme de traitement</h2>
-                    </div>
-                    <div class="mt-7 flex items-center gap-6">
-                        <div
-                            class="relative grid size-32 shrink-0 place-items-center rounded-full"
-                            :style="{ background: `conic-gradient(#d6a329 ${stats.completion_rate}%, hsl(var(--muted)) 0)` }"
-                        >
-                            <div class="grid size-24 place-items-center rounded-full bg-card">
-                                <div class="text-center">
-                                    <strong class="text-2xl">{{ stats.completion_rate }}%</strong>
-                                    <p class="text-[10px] uppercase tracking-wider text-muted-foreground">traités</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="min-w-0 flex-1 space-y-4">
-                            <div>
-                                <div class="mb-2 flex justify-between text-xs">
-                                    <span class="text-muted-foreground">Conformité</span><strong>{{ stats.compliance_rate }}%</strong>
-                                </div>
-                                <div class="h-2 overflow-hidden rounded-full bg-muted">
-                                    <div
-                                        class="h-full rounded-full bg-emerald-500 transition-all duration-1000"
-                                        :style="{ width: `${stats.compliance_rate}%` }"
-                                    />
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="rounded-2xl bg-muted/60 p-3">
-                                    <strong class="text-xl">{{ stats.signed }}</strong>
-                                    <p class="text-[11px] text-muted-foreground">Signés</p>
-                                </div>
-                                <div class="rounded-2xl bg-muted/60 p-3">
-                                    <strong class="text-xl">{{ stats.without_response }}</strong>
-                                    <p class="text-[11px] text-muted-foreground">Sans réponse</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <QuarterStrip
+                v-if="quarter"
+                :quarters="quarter.quarters"
+                :current="quarter.quarters.find((item) => item.is_current)?.key ?? ''"
+                :year="quarter.year"
+                href="/pilotage"
+                :thresholds="thresholds"
+                :label="`Bilan trimestre par trimestre · ${quarter.scope} · ${quarter.stage}`"
+            />
 
+            <div>
                 <section class="overflow-hidden rounded-[26px] border border-border/70 bg-card/80 shadow-sm backdrop-blur-xl">
                     <div class="flex items-center justify-between border-b border-border/60 px-5 py-5 sm:px-6">
                         <div>

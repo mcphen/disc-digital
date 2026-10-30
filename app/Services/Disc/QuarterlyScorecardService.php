@@ -154,7 +154,8 @@ class QuarterlyScorecardService
     }
 
     /**
-     * Résumé affiché sur la page d'accueil : trimestre en cours et trimestre précédent.
+     * Résumé affiché sur la page d'accueil : trimestre en cours, trimestre précédent et bilan
+     * de l'année trimestre par trimestre.
      *
      * @return array<string, mixed>|null
      */
@@ -184,6 +185,8 @@ class QuarterlyScorecardService
             'scope' => $scope,
             'stage' => self::STAGES[$stage]['label'],
             'period' => $period['label'],
+            'year' => $period['year'],
+            'quarters' => $this->quarters($rows, $period['year'], $stage),
             'current' => $current,
             'previous' => ['label' => $previous['label']] + $last,
             'remaining' => $current['not_due'],
@@ -334,22 +337,33 @@ class QuarterlyScorecardService
         return [
             'scores' => array_values($scores),
             'activity' => $this->activity($rows, $period, $mode),
-            'quarters' => collect([1, 2, 3, 4])->map(function (int $quarter) use ($rows, $period, $stages) {
-                $item = $this->makePeriod($period['year'], $quarter);
-                $score = $item['is_future'] ? null : $this->score($rows, $item, $stages[0]);
-
-                return [
-                    'key' => $item['key'],
-                    'label' => "T{$quarter}",
-                    'months' => $item['months'],
-                    'is_current' => $item['is_current'],
-                    'is_future' => $item['is_future'],
-                    'rate' => $score['rate'] ?? null,
-                    'measured' => $score['measured'] ?? 0,
-                    'standing' => $score['standing'] ?? 'none',
-                ];
-            })->all(),
+            'quarters' => $this->quarters($rows, $period['year'], $stages[0]),
         ];
+    }
+
+    /**
+     * Les quatre trimestres de l'année pour une étape (les trimestres à venir restent vides).
+     *
+     * @param  Collection<int, array<string, mixed>>  $rows
+     * @return array<int, array<string, mixed>>
+     */
+    private function quarters(Collection $rows, int $year, string $stage): array
+    {
+        return collect([1, 2, 3, 4])->map(function (int $quarter) use ($rows, $year, $stage) {
+            $item = $this->makePeriod($year, $quarter);
+            $score = $item['is_future'] ? null : $this->score($rows, $item, $stage);
+
+            return [
+                'key' => $item['key'],
+                'label' => "T{$quarter}",
+                'months' => $item['months'],
+                'is_current' => $item['is_current'],
+                'is_future' => $item['is_future'],
+                'rate' => $score['rate'] ?? null,
+                'measured' => $score['measured'] ?? 0,
+                'standing' => $score['standing'] ?? 'none',
+            ];
+        })->all();
     }
 
     /**

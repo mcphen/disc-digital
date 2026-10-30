@@ -204,8 +204,8 @@ const adjacentUrl = (id: number) => `/courriers/${id}?return=${encodeURIComponen
                 </div>
             </div>
 
-            <div class="grid gap-5 xl:grid-cols-3">
-                <div class="space-y-5 xl:col-span-2">
+            <div class="grid items-start gap-5 lg:grid-cols-3">
+                <div class="space-y-5 lg:col-span-2">
                     <section class="rounded-xl border bg-card p-5 md:p-6">
                         <h2 class="font-semibold">Informations du courrier</h2>
                         <dl class="mt-5 grid gap-x-6 gap-y-5 md:grid-cols-2">
@@ -510,7 +510,7 @@ const adjacentUrl = (id: number) => `/courriers/${id}?return=${encodeURIComponen
                     </section>
                 </div>
 
-                <aside class="rounded-xl border bg-card p-5 md:p-6">
+                <aside class="rounded-xl border bg-card p-5 md:p-6 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto">
                     <div class="flex items-center gap-2">
                         <Clock3 class="size-5 text-muted-foreground" />
                         <h2 class="font-semibold">Historique</h2>

@@ -62,6 +62,7 @@ class DashboardController extends Controller
                     : 0,
             ],
             'quarter' => $scorecards->headline($request->user()),
+            'thresholds' => $scorecards->thresholds(),
             'recentCourriers' => $courriers
                 ->sortByDesc('arrival_date')
                 ->take(8)

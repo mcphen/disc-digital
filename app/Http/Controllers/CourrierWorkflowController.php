@@ -134,7 +134,7 @@ class CourrierWorkflowController extends Controller
                 'division_validated_at' => null,
                 'division_validated_by_id' => null,
             ]);
-            $notifications->correctionRequested($courrier->fresh(['assignedAgent']));
+            $notifications->correctionRequested($courrier->fresh(['assignedAgent']), $request->validated('comment'));
 
             return back()->with('success', "La demande de correction a été transmise à l'agent.");
         }
