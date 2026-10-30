@@ -47,7 +47,7 @@ if (['admin', 'director', 'secretariat'].includes(page.props.auth.user.role)) {
     mainNavItems.push({ title: 'Nouveau courrier', href: '/courriers/create', icon: FilePlus2 });
 }
 if (['admin', 'director', 'division_head'].includes(page.props.auth.user.role)) {
-    mainNavItems.push({ title: 'Affectation en masse', href: '/courriers/bulk-assignment', icon: ListChecks });
+    mainNavItems.push({ title: 'Imputation en masse', href: '/courriers/bulk-assignment', icon: ListChecks });
 }
 mainNavItems.push({
     title: 'Notifications',

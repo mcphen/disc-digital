@@ -120,9 +120,9 @@ const formatDateTime = (value: string) => dateTimeFormat.format(new Date(value))
 const formatSize = (bytes: number) => (bytes < 1024 * 1024 ? `${Math.ceil(bytes / 1024)} Ko` : `${(bytes / 1024 / 1024).toFixed(1)} Mo`);
 const eventLabels: Record<string, string> = {
     created: 'Courrier enregistré',
-    assigned: 'Affectation mise à jour',
-    bulk_assigned: 'Affectation en masse',
-    bulk_assignment_undone: 'Affectation en masse annulée',
+    assigned: 'Imputation mise à jour',
+    bulk_assigned: 'Imputation en masse',
+    bulk_assignment_undone: 'Imputation en masse annulée',
     submitted: 'Dossier soumis au Directeur',
     submitted_for_review: 'Projet soumis au Chef de Division',
     division_approved: 'Projet validé par le Chef de Division',
@@ -226,7 +226,7 @@ const adjacentUrl = (id: number) => `/courriers/${id}?return=${encodeURIComponen
                                     {{ courrier.contributing_divisions.length ? 'Division pilote' : 'Division' }}
                                 </dt>
                                 <dd class="mt-1 text-sm">
-                                    {{ courrier.division ? `${courrier.division.code} — ${courrier.division.name}` : 'Non affectée' }}
+                                    {{ courrier.division ? `${courrier.division.code} — ${courrier.division.name}` : 'Non imputée' }}
                                 </dd>
                                 <dd v-if="courrier.contributing_divisions.length" class="mt-1 text-xs text-muted-foreground">
                                     En contribution :
@@ -235,7 +235,7 @@ const adjacentUrl = (id: number) => `/courriers/${id}?return=${encodeURIComponen
                             </div>
                             <div>
                                 <dt class="text-xs uppercase text-muted-foreground">Agent responsable</dt>
-                                <dd class="mt-1 text-sm">{{ courrier.assigned_agent?.name ?? courrier.legacy_agent_name ?? 'Non affecté' }}</dd>
+                                <dd class="mt-1 text-sm">{{ courrier.assigned_agent?.name ?? courrier.legacy_agent_name ?? 'Non imputé' }}</dd>
                                 <dd v-if="courrier.co_agents.length" class="mt-1 text-xs text-muted-foreground">
                                     Co-agents : {{ courrier.co_agents.map((agent) => agent.name).join(', ') }}
                                 </dd>
@@ -325,7 +325,7 @@ const adjacentUrl = (id: number) => `/courriers/${id}?return=${encodeURIComponen
                                 <UserRoundCheck class="size-5" />
                             </div>
                             <div>
-                                <h2 class="font-semibold">Imputation et affectation</h2>
+                                <h2 class="font-semibold">Imputation</h2>
                                 <p class="text-sm text-muted-foreground">
                                     La division pilote et l'agent responsable rédigent la réponse ; les contributeurs suivent le dossier et y
                                     apportent leurs éléments.
@@ -351,7 +351,7 @@ const adjacentUrl = (id: number) => `/courriers/${id}?return=${encodeURIComponen
                             <div class="grid gap-2">
                                 <Label>Agent responsable</Label
                                 ><select v-model="assignmentForm.assigned_agent_id" class="h-10 rounded-md border bg-background px-3 text-sm">
-                                    <option value="">À affecter plus tard</option>
+                                    <option value="">À imputer plus tard</option>
                                     <option v-for="agent in filteredAgents" :key="agent.id" :value="agent.id">{{ agent.name }}</option></select
                                 ><InputError :message="assignmentForm.errors.assigned_agent_id" />
                             </div>
@@ -396,7 +396,7 @@ const adjacentUrl = (id: number) => `/courriers/${id}?return=${encodeURIComponen
                                     :message="assignmentForm.errors.comment"
                                 />
                             </div>
-                            <div class="md:col-span-2"><Button :disabled="assignmentForm.processing">Enregistrer l'affectation</Button></div>
+                            <div class="md:col-span-2"><Button :disabled="assignmentForm.processing">Enregistrer l'imputation</Button></div>
                         </form>
                     </section>
 

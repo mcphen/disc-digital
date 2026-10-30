@@ -28,7 +28,7 @@ const sectionKeywords: Record<string, string> = {
     connexion: 'connexion connecter email mot de passe oublié compte accès erreur session',
     navigation: 'navigation tableau de bord recherche notifications menu raccourci',
     courrier: 'courrier enregistrer créer consulter référence pièce jointe historique',
-    affectation: 'affectation division agent masse sélectionner instruction',
+    imputation: 'imputation affectation division agent masse sélectionner instruction',
     traitement: 'traitement rôle secrétariat directeur chef division agent validation correction signature',
     alertes: 'alerte vert jaune rouge délai retard échéance priorité',
     rapports: 'rapport export csv imprimer pdf indicateur statistique',
@@ -43,7 +43,7 @@ const anchors = [
     { id: 'connexion', label: 'Connexion', icon: KeyRound },
     { id: 'navigation', label: 'Navigation', icon: FolderSearch2 },
     { id: 'courrier', label: 'Courriers', icon: FileCheck2 },
-    { id: 'affectation', label: 'Affectation', icon: ListChecks },
+    { id: 'imputation', label: 'Imputation', icon: ListChecks },
     { id: 'traitement', label: 'Circuit', icon: UsersRound },
     { id: 'alertes', label: 'Alertes', icon: BellRing },
     { id: 'rapports', label: 'Rapports', icon: BarChart3 },
@@ -53,7 +53,7 @@ const anchors = [
 const roles = [
     { name: 'Secrétariat', description: 'Enregistre le courrier entrant et réalise la première orientation.', color: 'bg-sky-500' },
     { name: 'Directeur', description: 'Oriente, supervise les priorités et signe les réponses validées.', color: 'bg-amber-500' },
-    { name: 'Chef de division', description: 'Affecte aux agents, contrôle le travail et demande les corrections.', color: 'bg-violet-500' },
+    { name: 'Chef de division', description: 'Impute aux agents, contrôle le travail et demande les corrections.', color: 'bg-violet-500' },
     { name: 'Agent', description: 'Traite ses courriers, joint les documents et soumet sa réponse.', color: 'bg-emerald-500' },
     { name: 'Administrateur', description: 'Gère les comptes, les paramètres, les imports et tous les circuits.', color: 'bg-stone-700' },
     { name: 'Auditeur', description: 'Consulte les dossiers, les historiques et les indicateurs autorisés.', color: 'bg-rose-500' },
@@ -79,7 +79,7 @@ const roles = [
                         v-model="search"
                         type="search"
                         class="h-12 border-white/15 bg-white/10 pl-12 text-white placeholder:text-stone-400"
-                        placeholder="Rechercher : connexion, affectation, retard…"
+                        placeholder="Rechercher : connexion, imputation, retard…"
                     />
                 </div>
             </div>
@@ -231,14 +231,14 @@ const roles = [
                         <div class="flex gap-3">
                             <ShieldCheck class="mt-0.5 size-5 shrink-0 text-sky-600" />
                             <p>
-                                <strong>Historique :</strong> chaque affectation, validation, correction et signature est enregistrée avec son auteur
+                                <strong>Historique :</strong> chaque imputation, validation, correction et signature est enregistrée avec son auteur
                                 et sa date.
                             </p>
                         </div>
                     </div>
                 </section>
 
-                <section v-if="visible('affectation')" id="affectation" class="scroll-mt-24 rounded-[24px] border bg-card p-5 sm:p-7">
+                <section v-if="visible('imputation')" id="imputation" class="scroll-mt-24 rounded-[24px] border bg-card p-5 sm:p-7">
                     <div class="flex items-start gap-3">
                         <span
                             class="grid size-11 shrink-0 place-items-center rounded-2xl bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300"
@@ -246,13 +246,13 @@ const roles = [
                         /></span>
                         <div>
                             <p class="disc-eyebrow">Organisation</p>
-                            <h2 class="mt-1 text-xl font-semibold">Affecter un ou plusieurs courriers</h2>
+                            <h2 class="mt-1 text-xl font-semibold">Imputer un ou plusieurs courriers</h2>
                         </div>
                     </div>
                     <ol class="mt-6 space-y-3 text-sm">
                         <li class="flex gap-3 rounded-2xl bg-muted/50 p-4">
                             <span class="font-bold text-amber-700">1.</span>
-                            <p>Ouvrez la fiche pour une affectation unique, ou « Affectation en masse » pour traiter plusieurs courriers.</p>
+                            <p>Ouvrez la fiche pour une imputation unique, ou « Imputation en masse » pour traiter plusieurs courriers.</p>
                         </li>
                         <li class="flex gap-3 rounded-2xl bg-muted/50 p-4">
                             <span class="font-bold text-amber-700">2.</span>
@@ -287,7 +287,7 @@ const roles = [
                     </div>
                     <div class="mt-5 flex flex-wrap items-center gap-2 text-xs font-semibold">
                         <span class="rounded-full bg-slate-100 px-3 py-1.5 text-slate-700">Enregistré</span><span>→</span
-                        ><span class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-700">Affecté</span><span>→</span
+                        ><span class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-700">Imputé</span><span>→</span
                         ><span class="rounded-full bg-violet-100 px-3 py-1.5 text-violet-700">À valider</span><span>→</span
                         ><span class="rounded-full bg-amber-100 px-3 py-1.5 text-amber-800">À signer</span><span>→</span
                         ><span class="rounded-full bg-emerald-100 px-3 py-1.5 text-emerald-700">Signé</span>

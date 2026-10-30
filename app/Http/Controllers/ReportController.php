@@ -86,7 +86,7 @@ class ReportController extends Controller
     {
         return [
             Courrier::STATUS_REGISTERED => 'Enregistré',
-            Courrier::STATUS_ASSIGNED_DIVISION => 'Affecté à une division',
+            Courrier::STATUS_ASSIGNED_DIVISION => 'Imputé à une division',
             Courrier::STATUS_ASSIGNED_AGENT => 'En traitement',
             Courrier::STATUS_PENDING_DIVISION_REVIEW => 'En attente du Chef de Division',
             Courrier::STATUS_CORRECTION_REQUESTED => 'Correction demandée',

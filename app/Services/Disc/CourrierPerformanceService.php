@@ -390,7 +390,7 @@ class CourrierPerformanceService
         foreach ($courriers as $courrier) {
             $divisions = collect([$courrier->division])->concat($courrier->contributingDivisions)->filter()->unique('id');
             if ($divisions->isEmpty()) {
-                $groups['Non affectée'][] = $courrier;
+                $groups['Non imputée'][] = $courrier;
             }
             foreach ($divisions as $division) {
                 $groups[$division->code][] = $courrier;

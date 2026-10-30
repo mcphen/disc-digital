@@ -84,7 +84,7 @@ class BulkCourrierAssignmentController extends Controller
 
         if ($user->role === 'division_head' && $user->division_id !== (int) $data['division_id']) {
             throw ValidationException::withMessages([
-                'division_id' => 'Vous ne pouvez affecter des courriers que dans votre division.',
+                'division_id' => 'Vous ne pouvez imputer des courriers que dans votre division.',
             ]);
         }
 
@@ -122,7 +122,7 @@ class BulkCourrierAssignmentController extends Controller
 
                 if (! $courrier->type->requires_response || ! in_array($courrier->status, self::ASSIGNABLE_STATUSES, true)) {
                     throw ValidationException::withMessages([
-                        'courrier_ids' => "Le courrier {$courrier->registration_number} ne peut plus être affecté.",
+                        'courrier_ids' => "Le courrier {$courrier->registration_number} ne peut plus être imputé.",
                     ]);
                 }
 
@@ -189,7 +189,7 @@ class BulkCourrierAssignmentController extends Controller
         $request->session()->put('bulk_assignment_undo', $undo);
 
         return to_route('courriers.bulk-assignment.index')
-            ->with('success', "{$count} courrier(s) ont été affectés avec succès.")
+            ->with('success', "{$count} courrier(s) ont été imputés avec succès.")
             ->with('bulk_undo', [
                 'token' => $batchId,
                 'count' => $count,
@@ -222,7 +222,7 @@ class BulkCourrierAssignmentController extends Controller
                     || $latestEvent->event !== 'bulk_assigned'
                     || ($latestEvent->metadata['batch_id'] ?? null) !== $undo['token']) {
                     throw ValidationException::withMessages([
-                        'token' => "L'un des courriers a été modifié depuis l'affectation. L'annulation automatique est impossible.",
+                        'token' => "L'un des courriers a été modifié depuis l'imputation. L'annulation automatique est impossible.",
                     ]);
                 }
 
@@ -241,7 +241,7 @@ class BulkCourrierAssignmentController extends Controller
                     'event' => 'bulk_assignment_undone',
                     'from_status' => $currentStatus,
                     'to_status' => $snapshot['status'],
-                    'comment' => 'Affectation en masse annulée immédiatement.',
+                    'comment' => 'Imputation en masse annulée immédiatement.',
                     'metadata' => ['bulk' => true, 'batch_id' => $undo['token']],
                 ]);
             }
@@ -250,6 +250,6 @@ class BulkCourrierAssignmentController extends Controller
         $request->session()->forget('bulk_assignment_undo');
 
         return to_route('courriers.bulk-assignment.index')
-            ->with('success', "L'affectation de {$undo['count']} courrier(s) a été annulée.");
+            ->with('success', "L'imputation de {$undo['count']} courrier(s) a été annulée.");
     }
 }

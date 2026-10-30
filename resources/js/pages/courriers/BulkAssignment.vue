@@ -95,12 +95,12 @@ const formatDate = (value: string) =>
     new Intl.DateTimeFormat('fr-SN', { dateStyle: 'medium', timeZone: 'Africa/Dakar' }).format(new Date(`${value}T00:00:00`));
 const breadcrumbs = [
     { title: 'Courriers', href: '/courriers' },
-    { title: 'Affectation en masse', href: '/courriers/bulk-assignment' },
+    { title: 'Imputation en masse', href: '/courriers/bulk-assignment' },
 ];
 </script>
 
 <template>
-    <Head title="Affectation en masse" />
+    <Head title="Imputation en masse" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex flex-1 flex-col gap-5 p-4 md:p-6 lg:p-8">
             <div
@@ -110,7 +110,7 @@ const breadcrumbs = [
                 <div>
                     <p class="font-semibold">{{ page.props.flash.success }}</p>
                     <p v-if="page.props.flash.bulk_undo" class="mt-0.5 text-xs opacity-80">
-                        Vous disposez de 5 minutes pour revenir à l’affectation précédente.
+                        Vous disposez de 5 minutes pour revenir à l’imputation précédente.
                     </p>
                 </div>
                 <Button
@@ -121,7 +121,7 @@ const breadcrumbs = [
                     :disabled="undoForm.processing"
                     @click="undoAssignment"
                 >
-                    <RotateCcw class="mr-2 size-4" /> Annuler l’affectation
+                    <RotateCcw class="mr-2 size-4" /> Annuler l’imputation
                 </Button>
             </div>
             <div
@@ -138,9 +138,9 @@ const breadcrumbs = [
                     </Button>
                     <div>
                         <p class="disc-eyebrow">Traitement groupé</p>
-                        <h1 class="mt-1 text-2xl font-semibold tracking-tight">Affectation en masse</h1>
+                        <h1 class="mt-1 text-2xl font-semibold tracking-tight">Imputation en masse</h1>
                         <p class="mt-1 text-sm text-muted-foreground">
-                            Sélectionnez les courriers puis appliquez une même affectation en une seule opération.
+                            Sélectionnez les courriers puis appliquez une même imputation en une seule opération.
                         </p>
                     </div>
                 </div>
@@ -158,8 +158,8 @@ const breadcrumbs = [
                 <select v-model="filterForm.scope" class="h-10 rounded-md border bg-background px-3 text-sm">
                     <option value="unassigned">Sans division</option>
                     <option value="division_only">Division sans agent</option>
-                    <option value="assigned">Déjà affectés</option>
-                    <option value="all">Tous les courriers affectables</option>
+                    <option value="assigned">Déjà imputés</option>
+                    <option value="all">Tous les courriers imputables</option>
                 </select>
                 <select v-model="filterForm.division" class="h-10 rounded-md border bg-background px-3 text-sm">
                     <option value="">Toutes les divisions</option>
@@ -190,7 +190,7 @@ const breadcrumbs = [
                                     </th>
                                     <th class="px-3 py-3">N° DISC</th>
                                     <th class="px-3 py-3">Courrier</th>
-                                    <th class="px-3 py-3">Affectation actuelle</th>
+                                    <th class="px-3 py-3">Imputation actuelle</th>
                                     <th class="px-3 py-3">État</th>
                                     <th class="px-3 py-3">Alerte</th>
                                 </tr>
@@ -228,7 +228,7 @@ const breadcrumbs = [
                                 </tr>
                                 <tr v-if="!courriers.length">
                                     <td colspan="6" class="px-4 py-14 text-center text-muted-foreground">
-                                        Aucun courrier affectable ne correspond aux filtres.
+                                        Aucun courrier imputable ne correspond aux filtres.
                                     </td>
                                 </tr>
                             </tbody>
@@ -280,7 +280,7 @@ const breadcrumbs = [
                             </template>
                         </MobileDataCard>
                         <div v-if="!courriers.length" class="px-4 py-14 text-center text-sm text-muted-foreground">
-                            Aucun courrier affectable ne correspond aux filtres.
+                            Aucun courrier imputable ne correspond aux filtres.
                         </div>
                     </div>
                 </section>
@@ -294,7 +294,7 @@ const breadcrumbs = [
                             <UsersRound class="size-5" />
                         </span>
                         <div>
-                            <h2 class="font-semibold">Nouvelle affectation</h2>
+                            <h2 class="font-semibold">Nouvelle imputation</h2>
                             <p class="text-xs text-muted-foreground">Appliquée aux {{ selectedCount }} courrier(s) sélectionné(s).</p>
                         </div>
                     </div>
@@ -330,7 +330,7 @@ const breadcrumbs = [
                                 :disabled="!assignmentForm.division_id"
                                 class="h-10 rounded-md border bg-background px-3 text-sm disabled:opacity-60"
                             >
-                                <option value="">Affecter uniquement à la division</option>
+                                <option value="">Imputer uniquement à la division</option>
                                 <option v-for="agent in filteredAgents" :key="agent.id" :value="agent.id">{{ agent.name }}</option>
                             </select>
                             <InputError :message="assignmentForm.errors.assigned_agent_id" />
@@ -358,7 +358,7 @@ const breadcrumbs = [
                     </div>
 
                     <Button class="mt-6 w-full" size="lg" :disabled="assignmentForm.processing || !selectedCount || !assignmentForm.division_id">
-                        <Send class="mr-2 size-4" /> Affecter {{ selectedCount || '' }} courrier(s)
+                        <Send class="mr-2 size-4" /> Imputer {{ selectedCount || '' }} courrier(s)
                     </Button>
                     <p class="mt-3 text-center text-xs text-muted-foreground">Une trace individuelle sera ajoutée à chaque historique.</p>
                 </form>
@@ -367,7 +367,7 @@ const breadcrumbs = [
             <Dialog v-model:open="confirmationOpen">
                 <DialogContent class="max-h-[90svh] overflow-y-auto rounded-[24px] sm:max-w-xl">
                     <DialogHeader>
-                        <DialogTitle>Confirmer l’affectation en masse</DialogTitle>
+                        <DialogTitle>Confirmer l’imputation en masse</DialogTitle>
                         <DialogDescription>Vérifiez le résumé avant de modifier les courriers sélectionnés.</DialogDescription>
                     </DialogHeader>
 
@@ -429,7 +429,7 @@ const breadcrumbs = [
                     <DialogFooter class="gap-2 sm:gap-0">
                         <Button type="button" variant="outline" @click="confirmationOpen = false">Revenir et modifier</Button>
                         <Button type="button" :disabled="assignmentForm.processing" @click="confirmAssignment"
-                            ><Send class="mr-2 size-4" /> Confirmer l’affectation</Button
+                            ><Send class="mr-2 size-4" /> Confirmer l’imputation</Button
                         >
                     </DialogFooter>
                 </DialogContent>

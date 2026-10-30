@@ -349,7 +349,7 @@ const breadcrumbs = [
                                 <td class="px-4 py-2.5">{{ row.stage }}</td>
                                 <td class="px-4 py-2.5">
                                     {{ row.division ?? '—' }}
-                                    <span class="block text-xs text-muted-foreground">{{ row.agent ?? 'Non affecté' }}</span>
+                                    <span class="block text-xs text-muted-foreground">{{ row.agent ?? 'Non imputé' }}</span>
                                 </td>
                                 <td class="px-4 py-2.5 text-right">
                                     <strong :class="row.age_days > 30 ? 'text-red-600 dark:text-red-400' : ''">{{ days(row.age_days) }}</strong>

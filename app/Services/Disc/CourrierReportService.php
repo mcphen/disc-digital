@@ -50,7 +50,7 @@ class CourrierReportService
             'completed' => $rows->whereIn('status', $closedStatuses)->count(),
             'in_progress' => $rows->whereNotIn('status', $closedStatuses)->count(),
             'overdue' => $rows->where('alert', 'ROUGE')->count(),
-            'by_division' => $this->breakdown($rows, 'division', 'Non affectée'),
+            'by_division' => $this->breakdown($rows, 'division', 'Non imputée'),
             'by_type' => $this->breakdown($rows, 'type', 'Non défini'),
             'by_status' => $this->breakdown($rows, 'status', 'Non défini'),
         ];

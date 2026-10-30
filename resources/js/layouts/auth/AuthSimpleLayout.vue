@@ -36,7 +36,7 @@ defineProps<{ title?: string; description?: string }>();
                     Chaque courrier.<br /><span class="text-amber-300">Au bon moment.</span>
                 </h2>
                 <p class="mt-6 max-w-lg text-base leading-7 text-slate-300 xl:text-lg">
-                    Une vision claire des affectations, des délais et des décisions. Sans tableurs dispersés, sans perte de contexte.
+                    Une vision claire des imputations, des délais et des décisions. Sans tableurs dispersés, sans perte de contexte.
                 </p>
 
                 <div class="mt-10 grid gap-3 sm:grid-cols-3">

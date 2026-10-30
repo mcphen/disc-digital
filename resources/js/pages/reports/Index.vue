@@ -170,7 +170,7 @@ const breadcrumbs = [{ title: 'Rapports', href: '/reports' }];
                                 </td>
                                 <td class="px-4 py-3">
                                     <p>{{ row.division ?? '—' }}</p>
-                                    <p class="text-xs text-muted-foreground">{{ row.agent ?? 'Non affecté' }}</p>
+                                    <p class="text-xs text-muted-foreground">{{ row.agent ?? 'Non imputé' }}</p>
                                 </td>
                                 <td class="px-4 py-3"><StatusBadge :status="row.status" :label="statuses[row.status] ?? row.status" /></td>
                                 <td class="px-4 py-3"><AlertBadge :level="row.alert" /></td>
@@ -195,7 +195,7 @@ const breadcrumbs = [{ title: 'Rapports', href: '/reports' }];
                             <div class="flex flex-wrap items-center justify-between gap-2">
                                 <StatusBadge :status="row.status" :label="statuses[row.status] ?? row.status" />
                                 <p class="text-right text-xs text-muted-foreground">
-                                    {{ row.division ?? 'Sans division' }} · {{ row.agent ?? 'Non affecté' }}
+                                    {{ row.division ?? 'Sans division' }} · {{ row.agent ?? 'Non imputé' }}
                                 </p>
                             </div>
                             <Button variant="outline" class="mt-3 w-full" as-child>

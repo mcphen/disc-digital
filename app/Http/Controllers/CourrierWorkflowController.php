@@ -26,7 +26,7 @@ class CourrierWorkflowController extends Controller
             Courrier::STATUS_CORRECTION_REQUESTED,
         ], true)) {
             throw ValidationException::withMessages([
-                'division_id' => "L'affectation ne peut plus être modifiée à cette étape.",
+                'division_id' => "L'imputation ne peut plus être modifiée à cette étape.",
             ]);
         }
 
@@ -83,7 +83,7 @@ class CourrierWorkflowController extends Controller
             ]);
         });
 
-        return back()->with('success', "L'affectation a été enregistrée.");
+        return back()->with('success', "L'imputation a été enregistrée.");
     }
 
     public function submit(

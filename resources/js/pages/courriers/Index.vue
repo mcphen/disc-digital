@@ -79,7 +79,7 @@ const openCourrier = (id: number) => router.visit(detailUrl(id));
                 </div>
                 <div class="grid grid-cols-1 gap-2 min-[430px]:grid-cols-2 sm:flex">
                     <Button v-if="canBulkAssign" variant="outline" class="w-full sm:w-auto" as-child>
-                        <Link href="/courriers/bulk-assignment"><ListChecks class="mr-2 size-4" /> Affectation en masse</Link>
+                        <Link href="/courriers/bulk-assignment"><ListChecks class="mr-2 size-4" /> Imputation en masse</Link>
                     </Button>
                     <Button v-if="canCreate" class="w-full sm:w-auto" as-child>
                         <Link href="/courriers/create"><FilePlus2 class="mr-2 size-4" /> Nouveau courrier</Link>
@@ -160,7 +160,7 @@ const openCourrier = (id: number) => router.visit(detailUrl(id));
                                 <th class="px-4 py-3">N° DISC</th>
                                 <th class="px-4 py-3">Arrivée</th>
                                 <th class="px-4 py-3">Courrier</th>
-                                <th class="px-4 py-3">Affectation</th>
+                                <th class="px-4 py-3">Imputation</th>
                                 <th class="px-4 py-3">État</th>
                                 <th class="px-4 py-3">Alerte</th>
                                 <th class="px-4 py-3 text-right">Action</th>
@@ -203,7 +203,7 @@ const openCourrier = (id: number) => router.visit(detailUrl(id));
                                         >
                                     </p>
                                     <p class="text-xs text-muted-foreground">
-                                        {{ courrier.assigned_agent?.name ?? courrier.legacy_agent_name ?? 'Non affecté' }}
+                                        {{ courrier.assigned_agent?.name ?? courrier.legacy_agent_name ?? 'Non imputé' }}
                                     </p>
                                 </td>
                                 <td class="px-4 py-4"><StatusBadge :status="courrier.status" :label="courrier.status_label" /></td>
